@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Ishant Dahiya</title>
+	<meta name="description" content="Ishant Dahiya" />
+	<meta name="keywords" content="freelancer, developer, website, python, bootstrap, automation, scripting" />
+	<meta name="author" content="Ishant Dahiya" />
+	<meta name="theme-color" content="#1f1f20">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="{% static "home/bootstrap/css/bootstrap.min.css"%}">
+
+	<!-- Font Awesome CSS -->
+	<link href="{% static "home/css/all.css"%}" rel="stylesheet" media="screen">
+
+	<!--[if lte IE 7]> 
+		<script src="home/js/icons-lte-ie7.js"></script>
+	<![endif]-->
+
+	<!-- Magnific-popup lightbox -->
+	<link href="{% static "home/css/magnific-popup.css"%}" rel="stylesheet">
+
+	<!-- Owl Carousel -->
+	<link href="{% static "home/css/owl.theme.css"%}" rel="stylesheet">
+	<link href="{% static "home/css/owl.carousel.css"%}" rel="stylesheet">
+
+	<!-- Animate css -->
+	<link href="{% static "home/css/animate.css"%}" rel="stylesheet">
+
+
+	<!-- Custom styles CSS -->
+	<link href="{% static "home/css/theme-blue.css"%}" rel="stylesheet" media="screen">
+	<!-- <link href="home/css/theme-green.css" rel="stylesheet" media="screen"> -->
+	<!-- <link href="home/css/theme-pink.css" rel="stylesheet" media="screen"> -->
+	<!-- <link href="home/css/theme-yellow.css" rel="stylesheet" media="screen"> -->
+	<!-- <link href="home/css/theme-purple.css" rel="stylesheet" media="screen"> -->
+</head>
+<body>
+
+	{% include 'home/includes/_preloader.html' %}
+    {% include 'home/includes/_navbar.html' %}
+
+
+	{% block content %}
+    {% endblock content %}
+
+	<!-- Contact end -->
+
+	{% include 'home/includes/_footer.html' %}
+
+	<!-- Scroll-up -->
+
+	<div class="scroll-up">
+		<a href="#home" id="scroll-up"><i class="fas fa-arrow-up"></i></a>
+	</div>
+
+	<!-- Javascript files -->
+
+	<!-- jQuery library -->
+	<script src="{% static "home/js/jquery.js"%}"></script>
+	
+	<!-- Popper JS -->
+	<script src="{% static "home/bootstrap/js/popper.js"%}"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="{% static "home/bootstrap/js/bootstrap.min.js"%}"></script>
+	
+	<script src="{% static "home/js/jquery.magnific-popup.min.js"%}"></script>
+	<script src="{% static "home/js/imagesloaded.pkgd.js"%}"></script>
+	<script src="{% static "home/js/tilt.jquery.js"%}"></script>
+	<script src="{% static "home/js/jquery.shuffle.min.js"%}"></script>
+	<script src="{% static "home/js/owl.carousel.min.js"%}"></script>
+	<script src="{% static "home/js/jquery.fitvids.js"%}"></script>
+	<script src="{% static "home/js/jquery.sticky.js"%}"></script>
+	<script src="{% static "home/js/wow.min.js"%}"></script>
+	<script src="{% static "home/js/typed.js"%}"></script>
+	<script src="{% static "home/js/parallax.js"%}"></script>
+
+    <!--PARTICLES ANIMATE JS-->
+    <script src="{% static "home/js/particles.js"%}"></script>  
+    <script src="{% static "home/js/particles.app.js"%}"></script> 
+
+	<!-- Custom scripts -->
+	<script src="{% static "home/js/custom.js"%}"></script>
+	<script src="{% static "home/js/custom-shuffle-init.js"%}"></script>
+
+</body>
+</html>
