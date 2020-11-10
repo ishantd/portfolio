@@ -1,4 +1,7 @@
 from django.db import models
+from django.core.files.base import ContentFile
+from PIL import Image
+from io import BytesIO
 
 # Create your models here.
 class ProjectCategory(models.Model):
@@ -14,6 +17,25 @@ class Project(models.Model):
     visit_url = models.CharField(max_length=255, null=True, blank=True)
     image = models.ImageField(upload_to ='projects/') 
     category = models.ForeignKey(ProjectCategory,on_delete=models.CASCADE, null=True, blank=False)
+    
+    def save(self, *args, **kwargs):
+        if self.image:
+            print("HELLO THE CODE IS WORKING")
+            filename = "%s.webp" % self.image.name.split('.')[0]
+            print(filename)
+            image = Image.open(self.image)
+            # for PNG images discarding the alpha channel and fill it with some color
+            if image.mode in ('RGBA', 'LA'):
+                background = Image.new(image.mode[:-1], image.size, '#fff')
+                background.paste(image, image.split()[-1])
+                image = background
+            image_io = BytesIO()
+            image.save(image_io, format='WEBP', quality=95)
+
+            # change the image field value to be the newly modified image value
+            self.image.save(filename, ContentFile(image_io.getvalue()), save=False)
+
+        super(Project, self).save(*args, **kwargs)
     
     def __str__(self):
         return self.name
