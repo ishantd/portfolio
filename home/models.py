@@ -43,3 +43,14 @@ class Response(models.Model):
     email = models.CharField(max_length=255, null=True, blank=False)
     message = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
+
+class Service(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=False)
+    icon = models.CharField(max_length=255, null=True, blank=False)
+    body = models.TextField(null=True, blank=True)
+
+class Testimony(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=False)
+    position = models.CharField(max_length=255, null=True, blank=False)
+    subtitle = models.CharField(max_length=255, null=True, blank=True)
+    body = models.TextField(null=True, blank=True)
