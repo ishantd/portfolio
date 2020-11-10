@@ -969,7 +969,7 @@ figure {
 .list-items-container .caption-inner {
 	position: absolute;
 	left: 0;
-	top: 50%;
+	top: 5%;
 	width: 100%;
 	margin-top: 20px;
 	transition: all 0.3s ease 0s;

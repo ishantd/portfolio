@@ -17,6 +17,7 @@ class Project(models.Model):
     visit_url = models.CharField(max_length=255, null=True, blank=True)
     image = models.ImageField(upload_to ='projects/') 
     category = models.ForeignKey(ProjectCategory,on_delete=models.CASCADE, null=True, blank=False)
+    active = models.BooleanField(null=False, default=True)
     
     def save(self, *args, **kwargs):
         if self.image:

@@ -56,9 +56,9 @@
 
 					<ul id="filter" class=" wow fadeInUp">
 						<li class="active" data-group="all">All</li>
-						<li data-group="slideshow">Slideshow</li>
-						<li data-group="video">Video</li>
-						<li data-group="image">Image</li>
+						{% for c_ in pcs %}
+							<li data-group="{{c_.abbr}}">{{c_.name}}</li>
+						{% endfor %}
 					</ul>
 
 				</div>
@@ -68,128 +68,26 @@
 			<!-- Portfolio Filter end -->
 
 			<ul class="list-items-container">
-
-				<li class="list-item" data-groups="all slideshow">
+			{% for p in projects %}
+				<li class="list-item" data-groups="all {{p.category.abbr}}">
 					<figure>
-						<img src="home/images/p1-1.jpg" alt="p1">
+						<img src="{{p.image.url}}" alt="{{p.name}}">
 						<figcaption>
-							<a href="home/images/p1-1.jpg" class="simple-ajax-popup"></a>
+							<a href="{{p.image.url}}" class="simple-ajax-popup"></a>
 							<div class="caption-inner">
-								<h3 class="portfolio-item-title">Some work</h3>
-								<div class="portfolio-item-desc">Slideshow</div>
+							{% if p.visit_url %}
+								<h3 class="portfolio-item-title">{{p.name}} <a href="{{p.visit_url}}" target="_blank"></a> </h3>
+							{% else %}
+								<h3 class="portfolio-item-title">{{p.name}}</h3>
+							{% endif %}
+								<div class="portfolio-item-desc">{{p.description}}</div>
 							</div>
 						</figcaption>
 					</figure>
 				</li>
-
-				<li class="list-item" data-groups="all video">
-					<figure>
-						<img src="home/images/p2-2.jpg" alt="p2">
-						<figcaption>
-							<a href="home/images/p2-2.jpg" class="simple-ajax-popup"></a>
-							<div class="caption-inner">
-								<h3 class="portfolio-item-title">Some work</h3>
-								<div class="portfolio-item-desc">Video</div>
-							</div>
-						</figcaption>
-					</figure>
-				</li>
-
-				<li class="list-item" data-groups="all image">
-					<figure>
-						<img src="home/images/p3-3.jpg" alt="p3">
-						<figcaption>
-							<a href="home/images/p3-3.jpg" class="simple-ajax-popup"></a>
-							<div class="caption-inner">
-								<h3 class="portfolio-item-title">Some work</h3>
-								<div class="portfolio-item-desc">Image</div>
-							</div>
-						</figcaption>
-					</figure>
-				</li>
-
-				<li class="list-item" data-groups="all slideshow">
-					<figure>
-						<img src="home/images/p4-4.jpg" alt="p4">
-						<figcaption>
-							<a href="home/images/p4-4.jpg" class="simple-ajax-popup"></a>
-							<div class="caption-inner">
-								<h3 class="portfolio-item-title">Some work</h3>
-								<div class="portfolio-item-desc">Slideshow</div>
-							</div>
-						</figcaption>
-					</figure>
-				</li>
-
-				<li class="list-item" data-groups="all video">
-					<figure>
-						<img src="home/images/p5-5.jpg" alt="p5">
-						<figcaption>
-							<a href="home/images/p5-5.jpg" class="simple-ajax-popup"></a>
-							<div class="caption-inner">
-								<h3 class="portfolio-item-title">Some work</h3>
-								<div class="portfolio-item-desc">Video</div>
-							</div>
-						</figcaption>
-					</figure>
-				</li>
-
-				<li class="list-item" data-groups="all image">
-					<figure>
-						<img src="home/images/p6-6.jpg" alt="p6">
-						<figcaption>
-							<a href="home/images/p6-6.jpg" class="simple-ajax-popup"></a>
-							<div class="caption-inner">
-								<h3 class="portfolio-item-title">Some work</h3>
-								<div class="portfolio-item-desc">Image</div>
-							</div>
-						</figcaption>
-					</figure>
-				</li>
-
-				<li class="list-item" data-groups="all image">
-					<figure>
-						<img src="home/images/p7-7.jpg" alt="p6">
-						<figcaption>
-							<a href="home/images/p7-7.jpg" class="simple-ajax-popup"></a>
-							<div class="caption-inner">
-								<h3 class="portfolio-item-title">Some work</h3>
-								<div class="portfolio-item-desc">Image</div>
-							</div>
-						</figcaption>
-					</figure>
-				</li>
-
-				<li class="list-item" data-groups="all image">
-					<figure>
-						<img src="home/images/p8-8.jpg" alt="p6">
-						<figcaption>
-							<a href="home/images/p8-8.jpg" class="simple-ajax-popup"></a>
-							<div class="caption-inner">
-								<h3 class="portfolio-item-title">Some work</h3>
-								<div class="portfolio-item-desc">Image</div>
-							</div>
-						</figcaption>
-					</figure>
-				</li>
-
-				<li class="list-item" data-groups="all image">
-					<figure>
-						<img src="home/images/p9-9.jpg" alt="p6">
-						<figcaption>
-							<a href="home/images/p9-9.jpg" class="simple-ajax-popup"></a>
-							<div class="caption-inner">
-								<h3 class="portfolio-item-title">Some work</h3>
-								<div class="portfolio-item-desc">Image</div>
-							</div>
-						</figcaption>
-					</figure>
-				</li>
-
-			</ul><!-- .projects-container -->
-
-		</div><!-- .contaier -->
-
+			{% endfor %}
+			</ul>
+		</div>
 	</section>
 
 	<!-- Portfolio end -->
