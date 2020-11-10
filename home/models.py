@@ -20,9 +20,7 @@ class Project(models.Model):
     
     def save(self, *args, **kwargs):
         if self.image:
-            print("HELLO THE CODE IS WORKING")
             filename = "%s.webp" % self.image.name.split('.')[0]
-            print(filename)
             image = Image.open(self.image)
             # for PNG images discarding the alpha channel and fill it with some color
             if image.mode in ('RGBA', 'LA'):
@@ -39,3 +37,9 @@ class Project(models.Model):
     
     def __str__(self):
         return self.name
+
+class Response(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=False)
+    email = models.CharField(max_length=255, null=True, blank=False)
+    message = models.TextField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
