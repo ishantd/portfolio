@@ -288,7 +288,7 @@
 
 	<!-- Blog end -->
 
-	<!-- Hire start-->
+	{% comment %} <!-- Hire start-->
 
 	<div class="module module-gray text-center">
 
@@ -302,7 +302,7 @@
 
 	</div>
 
-	<!-- Hire end -->
+	<!-- Hire end --> {% endcomment %}
 
 	<!-- Contact start -->
 
@@ -310,7 +310,19 @@
 		<div class="container">
 
 			<div class="module-header wow fadeInUp">
-				<h2 class="module-title"> Contact </h2>
+			<div id="ask-div">
+				<h2 class="module-title">I am available for Freelancing
+				</h2>
+					<h2 class="module-title"> Request a quote </h2>
+			</div>
+			<div id="loading-div">
+				<h2 class="module-title">Submitting your response</h2>
+				{% include 'home/includes/_preloader.html' with pos="contact" %}
+			</div>
+			<div id="response-div">
+			<h2 class="module-title">Thank you for your response</h2>
+			<p class="module-title" style="font-size: 25px;">I'll get back to you within 24 hours.</p>
+			</div>
 				<div class="module-line"></div>
 			</div>
 
@@ -318,21 +330,21 @@
 			<div class="row">
 
 				<div class="col-md-6 offset-md-3">
-
-					<form id="contact-form" action="#">
+					<form id="contact-form" action="/response/">
+					{% csrf_token %}
 						<div class="ajax-hidden">
 							<div class="form-group wow fadeInUp">
 								<label class="sr-only" for="c_name">Name</label>
-								<input type="text" id="c_name" class="form-control" name="c_name" placeholder="Name" required>
+								<input type="text" id="c_name" class="form-control" name="name" placeholder="Name" required>
 							</div>
 
 							<div class="form-group wow fadeInUp" data-wow-delay=".1s">
 								<label class="sr-only" for="c_email">Email address</label>
-								<input type="email" id="c_email" class="form-control" name="c_email" placeholder="E-mail" required>
+								<input type="email" id="c_email" class="form-control" name="email" placeholder="E-mail" required>
 							</div>
 
 							<div class="form-group wow fadeInUp" data-wow-delay=".2s">
-								<textarea class="form-control" id="c_message" name="c_message" rows="7" placeholder="Your message" required></textarea>
+								<textarea class="form-control" id="c_message" name="message" rows="7" placeholder="Your message" required></textarea>
 							</div>
 
 							<button type="submit" class="btn btn-block custom-btn wow fadeInUp" data-wow-delay=".3s">Send Message

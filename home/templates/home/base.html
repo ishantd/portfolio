@@ -34,10 +34,22 @@
 
 	<!-- Custom styles CSS -->
 	<link href="{% static "home/css/theme-blue.css"%}" rel="stylesheet" media="screen">
+	<style>
+		.form-control:focus {
+			color: white !important;
+			background-color: #fff;
+			border-color: #80bdff;
+			outline: 0;
+			box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+		}
+		.form-control{
+			color: white !important;
+		}
+	</style>
 </head>
 <body>
 
-	{% include 'home/includes/_preloader.html' %}
+	{% include 'home/includes/_preloader.html' with pos="center" %}
     {% include 'home/includes/_navbar.html' %}
 
 
@@ -77,6 +89,10 @@
 	<!-- Custom scripts -->
 	<script src="{% static "home/js/custom.js"%}"></script>
 	<script src="{% static "home/js/custom-shuffle-init.js"%}"></script>
-
+	<script src="{% static "home/js/form.js" %}"></script>
+	<script>
+		$("#response-div").hide();
+		$("#loading-div").hide();
+	</script>
 </body>
 </html>

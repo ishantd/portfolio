@@ -1573,6 +1573,16 @@ img.mfp-img {
 	background: #1f1f20;
 }
 
+#loading-contact {
+	position: relative;
+	left: 0;
+	right: 0;
+	/* height: 100%;
+	width: 108%; */
+	z-index: 99999;
+	background: #1f1f20;
+}
+
 .dot {
 	position: absolute;
 	width: 10px;
