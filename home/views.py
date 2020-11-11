@@ -8,8 +8,8 @@ def index(request):
     context = {
         'pcs': ProjectCategory.objects.all(),
         'projects': Project.objects.filter(active=True).order_by('?'),
-        'services': Service.objects.all(),
-        'tts': Testimony.objects.all(),
+        'services': Service.objects.all().order_by('?'),
+        'tts': Testimony.objects.all().order_by('?'),
     }
     return render(request, 'home/index.html', context)
 
