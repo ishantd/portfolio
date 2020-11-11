@@ -102,96 +102,23 @@
 				<div class="module-line"></div>
 			</div>
 
-			<div class="row">
-
+			<div class="row justify-content-center">
+			{% for s in services %}
 				<div class="col-md-6 col-lg-4">
 					<div class="iconbox wow fadeInUp">
 						<div class="iconbox-icon">
-							<i class="fas fa-desktop"></i>
+							<i class="{{s.icon}}"></i>
 						</div>
 						<div class="iconbox-text">
-							<h3 class="iconbox-title">Web Design</h3>
+							<h3 class="iconbox-title" style="font-size: 22px;">{{s.name}}</h3>
+							<h3 class="iconbox-title" style="font-size: 14px;">{{s.subtitle}}</h3>
 							<div class="iconbox-desc">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim...
+								{{s.body}}
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 col-lg-4">
-					<div class="iconbox wow fadeInUp">
-						<div class="iconbox-icon">
-							<i class="fas fa-code"></i>
-						</div>
-						<div class="iconbox-text">
-							<h3 class="iconbox-title">Web Development</h3>
-							<div class="iconbox-desc">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim...
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-4">
-					<div class="iconbox wow fadeInUp" data-wow-delay=".2s">
-						<div class="iconbox-icon">
-							<i class="fab fa-sketch"></i>
-						</div>
-						<div class="iconbox-text">
-							<h3 class="iconbox-title">Logo Design</h3>
-							<div class="iconbox-desc">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim...
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-4">
-
-					<div class="iconbox wow fadeInUp" data-wow-delay=".4s">
-						<div class="iconbox-icon">
-							<i class="far fa-comments"></i>
-						</div>
-						<div class="iconbox-text">
-							<h3 class="iconbox-title">Marketing</h3>
-							<div class="iconbox-desc">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim...
-							</div>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="col-md-6 col-lg-4">
-
-					<div class="iconbox wow fadeInUp" data-wow-delay=".6s">
-						<div class="iconbox-icon">
-							<i class="fas fa-palette"></i>
-						</div>
-						<div class="iconbox-text">
-							<h3 class="iconbox-title">Design</h3>
-							<div class="iconbox-desc">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim...
-							</div>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="col-md-6 col-lg-4">
-
-					<div class="iconbox wow fadeInUp" data-wow-delay=".8s">
-						<div class="iconbox-icon">
-							<i class="fas fa-rocket"></i>
-						</div>
-						<div class="iconbox-text">
-							<h3 class="iconbox-title">Branding</h3>
-							<div class="iconbox-desc">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim...
-							</div>
-						</div>
-					</div>
-
-				</div>
-
+			{% endfor %}
 			</div><!-- .row -->
 		</div><!-- .container -->
 	</section>
@@ -218,18 +145,13 @@
 					</div>
 
 					<div class="testimonials owl-carousel wow fadeInUp">
+					{% for t in tts %}
 						<div class="single-testimonials">
-							<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.</p>
-							<span>Jon Doe, Web Developer</span>
+							<p>{{t.body}}</p>
+							<span style="font-size: 18px;">{{t.name}}, {{t.position}}</span> <br>
+							<span>{{t.subtitle}}</span>
 						</div>
-						<div class="single-testimonials">
-							<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.</p>
-							<span>Jon Doe, Web Developer</span>
-						</div>
-						<div class="single-testimonials">
-							<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.</p>
-							<span>Jon Doe, Web Developer</span>
-						</div>
+					{% endfor %}
 					</div>
 
 				</div>
@@ -311,7 +233,7 @@
 
 			<div class="module-header wow fadeInUp">
 			<div id="ask-div">
-				<h2 class="module-title">I am available for Freelancing
+				<h2 class="module-title" style="font-size: 34px;">I am available for Freelancing
 				</h2>
 					<h2 class="module-title"> Request a quote </h2>
 			</div>

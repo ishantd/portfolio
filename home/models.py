@@ -47,6 +47,7 @@ class Response(models.Model):
 
 class Service(models.Model):
     name = models.CharField(max_length=255, null=True, blank=False)
+    subtitle = models.TextField(max_length=255, null=True, blank=True)
     icon = models.CharField(max_length=255, null=True, blank=False)
     body = models.TextField(null=True, blank=True)
 
