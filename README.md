@@ -1,9 +1,9 @@
 # SETUP
 
 #### Clone
-- [x] `git clone https://github.com/ishantd/superintern.git`
+- [x] `git clone https://github.com/ishantd/portfolio.git`
 
-- [x] `cd superintern`
+- [x] `cd portfolio`
 
 - [x] Install required libraries and dependencies <br/>
         `sudo apt-get update -y && sudo apt-get install python3-pip python3-dev libpq-dev postgresql postgresql-contrib python3-venv nginx -y`
@@ -67,7 +67,7 @@ google-chrome-stable --version
 
 pip3 install selenium --user
 
-git clone https://github.com/ishantd/superintern.git
+git clone https://github.com/ishantd/portfolio.git
 
 source env/bin/activate
 pip3 install -r requirements.txt
@@ -82,7 +82,7 @@ sudo unzip chromedriver_linux64.zip
 ## STEPS TO RUN REACT FRONT END
 
 #### 1) Navigate to the ~/client directory from your terminal
-- [x] `cd superintern`
+- [x] `cd portfolio`
 - [x] `cd client`
 
 #### 2) Install dependencies 
@@ -95,7 +95,7 @@ sudo unzip chromedriver_linux64.zip
 # Cronjob for tasks
 
 
-0    9    *    *    *   . /home/super/superintern/env/bin/activate /home/super/superintern/manage.py internshala yes
+0    9    *    *    *   . /home/ishant/portfolio/env/bin/activate /home/ishant/portfolio/manage.py internshala yes
 . /path-to-env/bin/activate && /home/user/Desktop/job/dp/manage.py statistics
 
 
@@ -111,30 +111,30 @@ After=network.target
 [Service]
 User=super
 Group=www-data
-WorkingDirectory=/home/super/superintern
-ExecStart=/home/super/superintern/env/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/super/superintern.sock superintern.wsgi:application
+WorkingDirectory=/home/ishant/portfolio
+ExecStart=/home/ishant/portfolio/env/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/ishant/portfolio.sock portfolio.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
 
-sudo nano /etc/nginx/sites-available/superintern
+sudo nano /etc/nginx/sites-available/portfolio
 
 server {
     listen 80;
-    server_name superintern.co ;
+    server_name portfolio.co ;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
-        root /home/super/superintern;
+        root /home/ishant/portfolio;
     }
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/home/super/superintern.sock;
+        proxy_pass http://unix:/home/ishant/portfolio.sock;
     }
 
     location /media/ {
-        alias /home/super/superintern/media/;
+        alias /home/ishant/portfolio/media/;
     }
 }
 
