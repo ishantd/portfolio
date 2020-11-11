@@ -138,7 +138,7 @@ server {
     }
 }
 
-sudo ln -s /etc/nginx/sites-available/superintern /etc/nginx/sites-enabled
+sudo ln -s /etc/nginx/sites-available/portfolio /etc/nginx/sites-enabled
 
 #### To restart server
 sudo pkill gunicorn
@@ -148,7 +148,6 @@ sudo systemctl restart nginx
 sudo systemctl restart gunicorn.service
 
 
-sudo systemctl restart gunicorn.service
-sudo systemctl restart nginx
+
 
 python3 manage.py collectstatic --no-input
