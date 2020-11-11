@@ -7,7 +7,7 @@ from home.models import *
 def index(request):
     context = {
         'pcs': ProjectCategory.objects.all(),
-        'projects': Project.objects.filter(active=True),
+        'projects': Project.objects.filter(active=True).order_by('?'),
         'services': Service.objects.all(),
         'tts': Testimony.objects.all(),
     }
