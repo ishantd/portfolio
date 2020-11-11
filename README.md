@@ -1,71 +1,106 @@
 # SETUP
 
-` sudo apt-get update -y`
+#### Clone
+- [x] `git clone https://github.com/ishantd/superintern.git`
+
+- [x] `cd superintern`
+
+- [x] Install required libraries and dependencies <br/>
+        `sudo apt-get update -y && sudo apt-get install python3-pip python3-dev libpq-dev postgresql postgresql-contrib python3-venv nginx -y`
+
+### Create Virtual Env (Preferred)
+bash/shell
+- [x] `python3 -m venv env` or `virtualenv env`
+switch to virtual environment 
+- [x] `source env/bin/activate`
+##### Install dependencies 
+- [x] `pip3 install -r requirements.txt`
+
+### Django setup
+
+##### To run dev server
+- [x] `python3 manage.py runserver`
+
+To setup up database go to `settings.py` 
+
+- [x] modify this code with your username (Linux/Mac)
+
 ```
-sudo apt-get install python3-pip python3-dev libpq-dev postgresql postgresql-contrib virtualenv nginx jupyter-notebook python3-venv -y
+if 'Your Username' in os.getcwd():
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            # 'NAME': os.path.join(BASE_DIR, 'serverdb.sqlite3'),
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'NAME': os.path.join(BASE_DIR, 'serverdb.sqlite3'),
+        }
+    }
 ```
-` git clone https://github.com/ishantd/triuneforum.git `
 
-` cd triuneforum `
-
-` python3 -m venv env && source env/bin/activate `
-
-` pip3 install wheel && pip3 install -r requirements.txt `
+- [x] Navigate to http://127.0.0.1:8000 to view dev server
 
 
 
-# refresh the server
-sudo pkill gunicorn
-sudo systemctl daemon-reload
-sudo systemctl start gunicorn
-sudo systemctl restart nginx
+## SCRAPER ON AWS
+
+sudo apt update
+sudo apt install unzip libnss3 python3-pip python3-venv xvfb
 
 
-# save github password
-git config --global credential.helper store
+cd /tmp/
+sudo wget https://chromedriver.storage.googleapis.com/83.0.4103.39/chromedriver_linux64.zip
+sudo unzip chromedriver_linux64.zip
+sudo mv chromedriver /usr/bin/chromedriver
+chromedriver --version
+
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb
+
+google-chrome-stable --version
+
+pip3 install selenium --user
+
+git clone https://github.com/ishantd/superintern.git
+
+source env/bin/activate
+pip3 install -r requirements.txt
+
+python3 manage.py makemigrations
+python3 manage.py migrate
+
+sudo wget https://chromedriver.storage.googleapis.com/83.0.4103.39/chromedriver_linux64.zip
+sudo unzip chromedriver_linux64.zip
 
 
+## STEPS TO RUN REACT FRONT END
 
-# setup on other Machine
+#### 1) Navigate to the ~/client directory from your terminal
+- [x] `cd superintern`
+- [x] `cd client`
 
+#### 2) Install dependencies 
+`npm install`
 
-
-
-1. Installation
-
-sudo apt-get update -y
-sudo apt-get install python3-pip python3-dev libpq-dev postgresql postgresql-contrib python3-venv virtualenv nginx -y
-pip3 install django django-crispy-forms django-mysql qrcode[pil] xhtml2pdf pdfkit django-session-timeout
-
-# for PDF Generation Install this
-wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
-sudo dpkg -i wkhtmltox_0.12.5-1.bionic_amd64.deb
-
-<!--  -->
-pip3 install git+git://github.com/ojii/pymaging.git#egg=pymaging
-pip3 install git+git://github.com/ojii/pymaging-png.git#egg=pymaging-png
-
-scp -i triune.pem /home/ubuntu/ishant_linux/triuneforum/db.sqlite3 ishant@ec2-52-23-254-99.compute-1.amazonaws.com:/home/ubuntu/triuneforum/
-
->>> User creation
-sudo adduser ishant
-sudo usermod -aG sudo ishant
-
-sudo adduser triuneforum
-sudo usermod -aG sudo triuneforum
-
-su - ishant
-
-sudo ufw enable
-sudo ufw allow OpenSSH
-sudo ufw allow 8000
-sudo ufw allow 5432
-
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#### 3)Run frontend application
+`npm start`
 
 
+# Cronjob for tasks
 
-Setup gunicorn :
+
+0    9    *    *    *   . /home/super/superintern/env/bin/activate /home/super/superintern/manage.py internshala yes
+. /path-to-env/bin/activate && /home/user/Desktop/job/dp/manage.py statistics
+
+
+Server Setup:
+
 
 sudo nano /etc/systemd/system/gunicorn.service
 
@@ -74,119 +109,46 @@ Description=gunicorn daemon
 After=network.target
 
 [Service]
-User=ubuntu
+User=super
 Group=www-data
-WorkingDirectory=/home/ubuntu/triuneforum
-ExecStart=/home/ubuntu/triuneforum/env/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/ubuntu/triuneforum.sock triuneforum.wsgi:application
+WorkingDirectory=/home/super/superintern
+ExecStart=/home/super/superintern/env/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/super/superintern.sock superintern.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
 
-[Unit]
-Description=gunicorn daemon
-After=network.target
-
-[Service]
-User=forumadmin
-Group=www-data
-WorkingDirectory=/home/forumadmin/triuneforum
-ExecStart=/home/forumadmin/triuneforum/env/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/forumadmin/triuneforum.sock triuneforum.wsgi:application
-
-[Install]
-WantedBy=multi-user.target
-
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-nginx Setup:
-
-54.227.203.60
-
-sudo nano /etc/nginx/sites-available/triuneforum
+sudo nano /etc/nginx/sites-available/superintern
 
 server {
     listen 80;
-    server_name 54.227.203.60;
+    server_name superintern.co ;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
-        root /home/ubuntu/triuneforum;
+        root /home/super/superintern;
     }
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/home/ubuntu/triuneforum.sock;
-    }
-}
-
-server {
-    listen 80;
-    server_name _;
-
-    location = /favicon.ico { access_log off; log_not_found off; }
-    location /static/ {
-        root /home/forumadmin/triuneforum;
+        proxy_pass http://unix:/home/super/superintern.sock;
     }
 
     location /media/ {
-        root /home/forumadmin/triuneforum;
-    }
-
-    location / {
-        include proxy_params;
-        proxy_pass http://unix:/home/forumadmin/triuneforum.sock;
+        alias /home/super/superintern/media/;
     }
 }
 
-sudo nano /etc/nginx/sites-available/triuneforums
+sudo ln -s /etc/nginx/sites-available/superintern /etc/nginx/sites-enabled
 
-server {
-    listen 80;
-    server_name tes-ceo.sensus.codes;
-
-    location = /favicon.ico { access_log off; log_not_found off; }
-    location /static/ {
-        root /home/ubuntu/triuneforum;
-    }
-
-    location / {
-        include proxy_params;
-        proxy_pass http://unix:/home/ubuntu/triuneforum.sock;
-    }
-}
-
-sudo ln -s /etc/nginx/sites-available/triuneforums /etc/nginx/sites-enabled
-
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-Update changes on server
-
+#### To restart server
 sudo pkill gunicorn
 sudo systemctl daemon-reload
 sudo systemctl start gunicorn
-sudo systemctl enable gunicorn
-sudo systemctl restart gunicorn
+sudo systemctl restart nginx
+sudo systemctl restart gunicorn.service
 
 
-sudo nginx -t
-sudo ufw delete allow 8000
-sudo ufw allow 'Nginx Full'
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+sudo systemctl restart gunicorn.service
+sudo systemctl restart nginx
 
-
-sudo ufw allow 8000
-
-jupyter notebook --ip=0.0.0.0 --port=9780
-
-
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-Resources : 
-
-
-https://docs.bitnami.com/aws/apps/noalyss/administration/configure-pgadmin/
-
-https://www.digitalocean.com/community/tutorials/how-to-set-up-a-scalable-django-app-with-digitalocean-managed-databases-and-spaces
-
-https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04#create-and-configure-a-new-django-project
-
-https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04
-
-/home/ubuntu/triuneforum/env/bin/python /home/ubuntu/triuneforum/manage.py send_queued_mail >> send_mail.log 2>&1
+python3 manage.py collectstatic --no-input
